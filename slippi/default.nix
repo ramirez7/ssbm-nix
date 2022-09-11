@@ -1,8 +1,8 @@
 { stdenv, lib, makeDesktopItem, gcc, slippi-desktop, playbackSlippi, fetchFromGitHub, makeWrapper
 , mesa_drivers, mesa_glu, mesa, pkgconfig, cmake, bluez, ffmpeg, libao, libGLU
 , gtk2, gtk3, wrapGAppsHook, glib, glib-networking, gettext, xorg, readline, openal, libevdev, portaudio, libusb
-, libpulseaudio, libudev, gnumake, wxGTK30, gdk-pixbuf, soundtouch, miniupnpc
-, mbedtls, curl, lzo, sfml, enet, xdg_utils, hidapi, webkit, vulkan-loader }:
+, libpulseaudio, udev, gnumake, wxGTK30, gdk-pixbuf, soundtouch, miniupnpc
+, mbedtls, curl, lzo, sfml, enet, xdg_utils, hidapi, webkitgtk, vulkan-loader }:
 let
 
   netplay-desktop = makeDesktopItem {
@@ -11,8 +11,8 @@ let
     comment = "Play Melee Online!";
     desktopName = "Slippi-Netplay";
     genericName = "Wii/GameCube Emulator";
-    categories = "Game;Emulator;";
-    startupNotify = "false";
+    categories = [ "Game" "Emulator" ];
+    startupNotify = false;
   };
 
   playback-desktop = makeDesktopItem {
@@ -21,8 +21,8 @@ let
     comment = "Watch Your Slippi Replays";
     desktopName = "Slippi-Playback";
     genericName = "Wii/GameCube Emulator";
-    categories = "Game;Emulator;";
-    startupNotify = "false";
+    categories = [ "Game" "Emulator" ];
+    startupNotify = false;
   };
 
 in stdenv.mkDerivation rec {
@@ -68,14 +68,16 @@ in stdenv.mkDerivation rec {
     wrapProgram "$out/dolphin-emu" \
       --set "GDK_BACKEND" "x11" \
       --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules" \
-      --prefix LD_LIBRARY_PATH : "${vulkan-loader}/lib"
+      --prefix LD_LIBRARY_PATH : "${vulkan-loader}/lib" \
+      --prefix PATH : "${xdg_utils}/bin"
     ln -s $out/dolphin-emu $out/bin/slippi-playback
     ln -s ${playback-desktop}/share/applications $out/share
   '' else ''
     wrapProgram "$out/dolphin-emu" \
       --set "GDK_BACKEND" "x11" \
       --prefix GIO_EXTRA_MODULES : "${glib-networking}/lib/gio/modules" \
-      --prefix LD_LIBRARY_PATH : "${vulkan-loader}/lib"
+      --prefix LD_LIBRARY_PATH : "${vulkan-loader}/lib" \
+      --prefix PATH : "${xdg_utils}/bin"
     ln -s $out/dolphin-emu $out/bin/slippi-netplay
     ln -s ${netplay-desktop}/share/applications $out/share
   '';
@@ -107,7 +109,7 @@ in stdenv.mkDerivation rec {
     portaudio
     libusb
     libpulseaudio
-    libudev
+    udev
     gnumake
     wxGTK30
     gtk2
@@ -122,6 +124,6 @@ in stdenv.mkDerivation rec {
     enet
     xdg_utils
     hidapi
-    webkit
+    webkitgtk
   ];
 }
