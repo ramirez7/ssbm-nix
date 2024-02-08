@@ -78,7 +78,7 @@ in
       owner = "project-slippi";
       repo = "Ishiiruka";
       rev = "v${version}";
-      hash = "sha256-06hS770zo/4XnvKc9Mtxn+cAvAF6fNXR+SRzKFNoh11=";
+      hash = "0000000000000000000000000000000000000000000000000000000000000000";
       fetchSubmodules = true;
     };
 
