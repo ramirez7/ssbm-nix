@@ -87,7 +87,7 @@ in
     cargoDeps = rustPlatform.importCargoLock {
       lockFile = "${src}/${cargoRoot}/Cargo.lock";
       outputHashes = {
-        "cpal-0.15.2" = "sha256-4C7YWUx6SZnZy6pwy0CCL3yPgaMflN1atN3cUNMbcmU=";
+        "cpal-0.15.2" = "0000000000000000000000000000000000000000000000000000000000000000";
       };
     };
 
