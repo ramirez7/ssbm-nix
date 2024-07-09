@@ -78,7 +78,7 @@ in
       owner = "project-slippi";
       repo = "Ishiiruka";
       rev = "v${version}";
-      hash = "0000000000000000000000000000000000000000000000000000000000000000";
+      hash = "sha256-qYPrAPAPOoCqfidLsT+ycQd2dXtsjo1PRt4TznVZf6U=";
       fetchSubmodules = true;
     };
 
@@ -87,7 +87,7 @@ in
     cargoDeps = rustPlatform.importCargoLock {
       lockFile = "${src}/${cargoRoot}/Cargo.lock";
       outputHashes = {
-        "cpal-0.15.2" = "0000000000000000000000000000000000000000000000000000000000000000";
+        "cpal-0.15.2" = "sha256-4C7YWUx6SZnZy6pwy0CCL3yPgaMflN1atN3cUNMbcmU=";
       };
     };
 
