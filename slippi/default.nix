@@ -68,7 +68,7 @@
 in
   stdenv.mkDerivation rec {
     pname = "slippi-ishiiruka";
-    version = "3.4.1";
+    version = "3.4.2";
     name = "${pname}-${version}-${
       if playbackSlippi
       then "playback"
@@ -78,7 +78,7 @@ in
       owner = "project-slippi";
       repo = "Ishiiruka";
       rev = "v${version}";
-      hash = "sha256-uqy9YQnvryTHmskzlX+4st1VacnHbpC2gdC+PgvFUlA=";
+      hash = "sha256-zvjGKneUjOXsRkWuNNK2X0MwfduCYGA9Sp0osa9fQsU=";
       fetchSubmodules = true;
     };
 
